@@ -24,7 +24,7 @@ const Main = () => {
           trends — all in one place. Join us today and take control of your investment journey with confidence
           and precision.
         </p>
-         <Button text="Login" className="btn-outline-info"/>
+         <Button text="Login" className="btn-outline-info" url="/login"/>
           
         
       </div>
