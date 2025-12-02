@@ -1,12 +1,15 @@
-
-import './App.css'
+import React from 'react'
+import './assets/CSS/style.css'
+import Header from './components/header'
+import Main from './components/main'
+import Footer from './components/footer'
 
 function App() {
-  
-
   return (
     <>
-        <h3>stock prediction web</h3>
+      <Header/>
+      <Main />
+      <Footer />
     </>
   )
 }
