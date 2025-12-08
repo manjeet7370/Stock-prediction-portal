@@ -26,20 +26,18 @@ const Login = () => {
       const response = await axios.post('http://127.0.0.1:8000/api/v1/token/', userData)
       localStorage.setItem('accessToken', response.data.access)
       localStorage.setItem('refreshToken', response.data.refresh)
-      console.log('Login successful')
+      
       setisLoggedIn(true)
-      navigate('/')
+      navigate('/dashboard')
       
 
     }catch(error){
-         console.error('invalid credentials')
-         setError('invalid credentials')
+         
+        setError("Login failed. Please try again.");
     }finally{
       setLoading(false)
     }
-
   }
-
   return (
     <>
       <div className='container'>
@@ -51,7 +49,7 @@ const Login = () => {
                       <input type="text" className='form-control mb-3' placeholder='Enter username' value={username} onChange={(e)=> setUsername(e.target.value)}/>
                     </div>
                     <div className='mb-3'>
-                    <input type="password" className='form-control mb-3'  placeholder='Set password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <input type="password" className='form-control mb-3'  placeholder='Enter password' value={password} onChange={(e) => setPassword(e.target.value)}/>
                     </div> 
                     
                     {error && <div className='text-danger'>{error}</div>}
