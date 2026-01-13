@@ -1,57 +1,51 @@
 import axios from "axios";
 
+const axiosInstance = axios.create({
+  baseURL: `${import.meta.env.VITE_API_URL}/api/v1`,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
-const baseURL = `${import.meta.env.VITE_API_URL}/api/v1`
-const axiosInstance  = axios.create ({
-    baseURL : baseURL,
-    headers : {
-        'content-type' : 'application/json',
-    }
-
-})
-
-// Request Interseptor
-
+// REQUEST INTERCEPTOR
 axiosInstance.interceptors.request.use(
-    function(config){
-       
-        const accessToken = localStorage.getItem('accessToken')
-        if(accessToken){
-            config.headers['Authorization'] = `Bearer ${accessToken}`
-        }
-        return config
-    }, 
-    function (error){
-        return Promise.reject(error)
+  (config) => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
-)
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
-//  Response Interceptor
+// RESPONSE INTERCEPTOR
 axiosInstance.interceptors.response.use(
-    function(response){
-        return response
-    },
-    // Handle failed response
-    async function(error){
-        const orignalRequest = error.config;
-        if(error.response.status === 401 && !orignalRequest.retry){
-            orignalRequest.retry = true;
-            const refreshToken = localStorage.getItem('refreshToken')
-            try{
-              const response = await axiosInstance.post('/token/refresh/', {refresh: refreshToken})
-              console.log('NewAccessToken',response.data.access)
-              localStorage.setItem('accessToken', response.data.access)
-              orignalRequest.headers['Authorization'] = `Bearer ${response.data.access}`
-              return axiosInstance(orignalRequest)
-            }catch(error){
-               localStorage.removeItem('accessToken')
-               localStorage.removeItem('refreshToken')
-              
-            }
-        }
-        return Promise.reject(error)
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const refresh = localStorage.getItem("refreshToken");
+
+      try {
+        const res = await axios.post(
+          `${import.meta.env.VITE_API_URL}/api/v1/token/refresh/`,
+          { refresh }
+        );
+
+        localStorage.setItem("accessToken", res.data.access);
+        originalRequest.headers.Authorization = `Bearer ${res.data.access}`;
+        return axiosInstance(originalRequest);
+      } catch (err) {
+        localStorage.clear();
+        window.location.href = "/login";
+      }
     }
-)
- 
+
+    return Promise.reject(error);
+  }
+);
 
 export default axiosInstance;
