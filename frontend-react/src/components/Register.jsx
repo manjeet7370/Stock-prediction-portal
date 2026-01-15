@@ -50,7 +50,7 @@ const Register = () => {
                       <small>{errors.email && <div className='text-danger'>{errors.email}</div>}</small>
                     </div>
                     <div className='mb-3'>
-                    <input type="password" className='form-control mb-3'  placeholder='Set password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <input type="password" className='form-control mb-3'  placeholder='Set password' autoComplete="new-password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                     <small>{errors.password && <div className='text-danger'>{errors.password}</div>}</small>
                     </div> 
                     {success && <div className='alert alert-success'>Rgistraion Successful</div>}

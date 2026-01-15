@@ -55,7 +55,7 @@ const Login = () => {
                       <input type="text" className='form-control mb-3' placeholder='Enter username' value={username} onChange={(e)=> setUsername(e.target.value)}/>
                     </div>
                     <div className='mb-3'>
-                    <input type="password" className='form-control mb-3'  placeholder='Enter password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <input type="password" className='form-control mb-3'  placeholder='Enter password' autoComplete="new-password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                     </div> 
                     
                     {error && <div className='text-danger'>{error}</div>}
