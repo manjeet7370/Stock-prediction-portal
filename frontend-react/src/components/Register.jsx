@@ -22,13 +22,13 @@ const Register = () => {
     }
     try{
       const response = await axios.post(`${API_BASE}/api/v1/register/`, userData)
-      console.log('response.data ==> ', response.data)
-      console.log('registration successfull')
+      // console.log('response.data ==> ', response.data)
+      // console.log('registration successfull')
       setErrors({})
       setSuccess(true)
     }catch(error) {
        setErrors(error.response.data)
-       console.log('Registration Error', error.response.data)
+      //  console.log('Registration Error', error.response.data)
 
     }finally{
       setLoading(false)

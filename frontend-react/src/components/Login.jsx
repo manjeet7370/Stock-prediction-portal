@@ -22,7 +22,7 @@ const Login = () => {
     setLoading(true)
 
     const userData = {username, password}
-    console.log(userData)
+    // console.log(userData)
 
     try{
       const response = await axios.post(`${API_BASE}/api/v1/token/`, userData)
