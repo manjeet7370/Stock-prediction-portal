@@ -52,7 +52,7 @@ const Login = () => {
                   <h3 className='text-light text-center mb-4'>Login to our Portal</h3>
                   <form  onSubmit={handleLogin}>
                     <div className='mb-3'>
-                      <input type="text" className='form-control mb-3' placeholder='Enter username' value={username} onChange={(e)=> setUsername(e.target.value)}/>
+                      <input type="text" className='form-control mb-3' placeholder='Enter username' autoComplete="username" value={username} onChange={(e)=> setUsername(e.target.value)}/>
                     </div>
                     <div className='mb-3'>
                     <input type="password" className='form-control mb-3'  placeholder='Enter password' autoComplete="new-password" value={password} onChange={(e) => setPassword(e.target.value)}/>

@@ -42,11 +42,11 @@ const Register = () => {
                   <h3 className='text-light text-center mb-4'>Crate an Account</h3>
                   <form onSubmit={handleRegistration}>
                     <div className='mb-3'>
-                      <input type="text" className='form-control mb-3' placeholder='Enter username' value={username} onChange={(e)=> setUsername(e.target.value)}/>
+                      <input type="text" className='form-control mb-3' placeholder='Enter username' autoComplete="username" value={username} onChange={(e)=> setUsername(e.target.value)}/>
                      <small>{errors.username && <div className='text-danger'>{errors.username}</div>}</small>
                     </div>
                     <div className='mb-3'>
-                     <input type="email" className='form-control mb-3'  placeholder='Enter email address' value={email} onChange={(e) => setEmail(e.target.value)}/> 
+                     <input type="email" className='form-control mb-3'  placeholder='Enter email address' autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)}/> 
                       <small>{errors.email && <div className='text-danger'>{errors.email}</div>}</small>
                     </div>
                     <div className='mb-3'>
